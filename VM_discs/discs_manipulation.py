@@ -1,5 +1,6 @@
 from blkinfo import BlkDiskInfo
 import json
+import linu
 
 
 class Discs:
