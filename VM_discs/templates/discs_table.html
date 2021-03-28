@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VM_discs available</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Disc</th>
+                <th>Size</th>
+                <th>Mountpoint</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for disc in clear_discs %}
+                <tr>
+                    <th>{{ disc.name }}</th>
+                    <th>{{ disc.size }}</th>
+                    <th>{{ disc.mountpoint }}</th>
+                    <th>
+                        <button>Edit</button>
+                        <button>Format</button>
+                        <button>Mount</button>
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
