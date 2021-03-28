@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .discs_manipulation import Discs
 
 
-def disks_table(request):
+def discs_table(request):
     d = Discs()
-    d.get_discs()
-    return render(request, 'disks_table.html', {})
+    clear_discs = d.get_discs()
+    print('============VIEW MAZAFAKA', type(clear_discs))
+    return render(request, 'discs_table.html', {"clear_discs": clear_discs})
