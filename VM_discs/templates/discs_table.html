@@ -18,11 +18,12 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    <section class="content container">
+    <section class="content container mt-5">
+        <h3 class="lead text-center">Available discs:</h3>
         <table class="table table-striped table-bordered table-responsive text-center">
             <thead class="thead-dark">
                 <tr class="">
-                    <th class="col-1">Disc</th>
+                    <th class="col">Disc</th>
                     <th class="col">Size</th>
                     <th class="col">Mountpoint</th>
                     <th class="col">Actions</th>
@@ -31,7 +32,7 @@
             <tbody>
                 {% for disc in clear_discs %}
                     <tr class="">
-                        <td class="col-1">{{ disc.name }}</td>
+                        <td class="col">{{ disc.name }}</td>
                         <td class="col">{{ disc.size }}</td>
                         <td class="col">{{ disc.mountpoint }}</td>
                         <td class="col">
@@ -43,6 +44,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        <p class="lead">Empty mountpoint values replaced with '-'</p>
     </section>
 </body>
 </html>
