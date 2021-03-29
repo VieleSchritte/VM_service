@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" action="{% url 'login' %}" class="form-group">
+        {% csrf_token %}
+        <table class="align-middle mt-3">
+            <tr class="mt-5">
+              <td class="mx-auto lead"> {{ form.username.label_tag }}</td>
+              <td class="form-control mb-2 ml-3">{{ form.username }}</td>
+            </tr>
+
+            <tr class="mt-5">
+              <td class="mx-auto lead">{{ form.password.label_tag }}</td>
+              <td class="form-control ml-3">{{ form.password }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ form.email.label_tag }}</td>
+                <td>{{ form.email }}</td>
+            </tr>
+        </table>
+        <div class="form-row mt-3">
+            <input type="submit" value="register" class="btn btn-secondary col w-30 mr-3"/>
+        </div>
+    </form>
+{% endblock %}
