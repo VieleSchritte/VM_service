@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'VM_discs'
 ]
 
+# CSRF_COOKIE_DOMAIN = None
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -21,28 +21,32 @@
                 <tbody>
                     {% for disc in clear_discs %}
                         <tr>
-                            <td id="disc-name" class="col">
+                            <td id="{{ disc.name }}-name" class="col">
                                 <p class="lead d-block font-weight-bold">{{ disc.name }}</p>
                             </td>
-                            <td id="disc-size" class="col">{{ disc.size }}</td>
-                            <td id="disc-mountpoint" class="col">{{ disc.mountpoint }}</td>
-
-                            <td class="col">
-                                <input id="{{ disc.name }}" type="button" class="format btn btn-secondary btn-sm btn-block" value="Format">
-                                {% if disc.mountpoint == '' %}
-                                    <div>
-                                        <p class="lead mb-0 mt-2">
-                                            Mountpoint:
-                                        </p>
+                            <td id="{{ disc.name }}-size" class="col">{{ disc.size }}</td>
+                            {% if disc.mountpoint != '' %}
+                                <td id="{{ disc.name }}-mountpoint" class="col">{{ disc.mountpoint }}</td>
+                            {% else %}
+                                <td id="{{ disc.name }}-mountpoint" class="col">
+                                    <div class="mount-group mb-2">
+                                        <p class="lead mb-0 mt-2">Mountpoint:</p>
                                         <form action="" method="POST">
-                                            <input type="text" size="100" class="form-control mountpoint" name="{{ disc.name }}">
+                                            {% csrf_token %}
+                                            <input type="text" size="100" class="form-control mountpoint" name="mounpoint_name">
+                                            <input hidden name="disc" value="{{ disc.name }}">
                                             <button id="{{ disc.name }}" type="submit" class="mount btn btn-secondary btn-sm btn-block mt-1">Mount</button>
                                         </form>
                                     </div>
-                                {% else %}
+                                </td>
+                            {% endif %}
+
+                            <td class="col">
+                            {% csrf_token %}
+                                <input id="{{ disc.name }}" type="button" class="format btn btn-secondary btn-sm btn-block" value="Format">
+                                {% if disc.mountpoint != '' %}
                                     <input id="{{ disc.name }}" type="button" class="unmount btn btn-secondary btn-sm btn-block" value="Unmount">
                                 {% endif %}
-
                             </td>
                         </tr>
                     {% endfor %}
@@ -62,6 +66,10 @@
         {% endif %}
     </div>
     <script>
+        // Format: disc-name
+        // Mount: mounpoint, disc-name
+        // Unmount: mountpoint
+
 
     </script>
 {% endblock %}
