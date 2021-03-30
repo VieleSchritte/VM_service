@@ -1,22 +1,26 @@
 from blkinfo import BlkDiskInfo
+from os import system
+import os
 
 
 class Discs:
     @staticmethod
     def get_discs():
-        b = BlkDiskInfo()
-        all_discs = b.get_disks()
-        table_keys = ["name", "size", "mountpoint"]
-        clear_discs = []
-        for disc in all_discs:
-            temporal_dict = {}
-            for key in table_keys:
-                if key == 'mountpoint' and disc[key] == '':
-                    temporal_dict[key] = '-'
+        all_discs = []
+        os.system('lsblk >> lsblk_out.txt')
+        with open ('lsblk_out.txt') as lsblk_out:
+            for line in lsblk_out:
+                line = line.strip().split()
+                if line[0] == "NAME":
+                    continue
+                temporal_dict = {"name": line[0], "size": line[3]}
+                if len(line) < 7:
+                    temporal_dict["mountpoint"] = ''
                 else:
-                    temporal_dict[key] = disc[key]
-            clear_discs.append(temporal_dict)
+                    temporal_dict ["mountpoint"] = line[6]
+                all_discs.append(temporal_dict)
 
-        del all_discs
-        return clear_discs
+        os.system('rm lsblk_out.txt')
+        return all_discs
 
+    
