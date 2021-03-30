@@ -46,16 +46,25 @@ class Discs:
         return all_discs
 
     @staticmethod
-    def mount_action(path_to_device, mountpoint):
-        mount = 'sudo mount ' + path_to_device + ' ' + mountpoint
+    def mount_action(device, mountpoint):
+        mount = 'sudo mount ' + device + ' ' + mountpoint
         os.system(mount)
+        print('========='
+              '=MOUNTED='
+              '=========')
 
     @staticmethod
     def unmount_action(mountpoint):
         unmount = 'sudo unmount ' + mountpoint
         os.system(unmount)
+        print('==========='
+              '=UNMOUNTED='
+              '===========')
 
     @staticmethod
     def format_action(path_to_device):
         format_act = 'sudo mkfs -t ext4 ' + path_to_device
         os.system(format_act)
+        print('==========='
+              '=FORMATTED='
+              '===========')

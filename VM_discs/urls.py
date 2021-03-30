@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.discs_table, name='discs_table'),
-    path('', views.mount_disc, name='mount_disc'),
-    path('', views.unmount_disc, name='unmount_disc'),
-    path('', views.format_disc, name='format_disc')
+    path('/mount_disc', views.mount_disc, name='mount_disc'),
+    path('/unmount_disc', views.unmount_disc, name='unmount_disc'),
+    path('/format_disc', views.format_disc, name='format_disc')
 ]
