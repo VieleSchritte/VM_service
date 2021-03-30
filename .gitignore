@@ -6,4 +6,3 @@ venv
 db.sqlite3
 .idea
 .env
-discs_manipulation.py
