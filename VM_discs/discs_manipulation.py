@@ -22,3 +22,18 @@ class Discs:
         os.system('rm -rf tmp')
         print(all_discs)
         return all_discs
+
+    @staticmethod
+    def mount_action(path_to_device, mountpoint):
+        mount = 'sudo mount ' + path_to_device + ' ' + mountpoint
+        os.system(mount)
+
+    @staticmethod
+    def unmount_action(mountpoint):
+        unmount = 'sudo unmount ' + mountpoint
+        os.system(unmount)
+
+    @staticmethod
+    def format_action(path_to_device):
+        format_act = 'sudo mkfs -t ext4 ' + path_to_device
+        os.system(format_act)
