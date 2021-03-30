@@ -23,18 +23,26 @@
                         <tr>
                             <td id="disc-name" class="col">
                                 <p class="lead d-block font-weight-bold">{{ disc.name }}</p>
-                                <div class="text-group d-block">
-                                    <b class="lead d-block">Please enter mount path:</b>
-                                    <label><textarea name="mount-path" class="form-control w-150"></textarea></label>
-                                    <button type="submit" class="mount-submit btn btn-primary btn-sm d-block btn-block">Mount</button>
-                                </div>
                             </td>
                             <td id="disc-size" class="col">{{ disc.size }}</td>
                             <td id="disc-mountpoint" class="col">{{ disc.mountpoint }}</td>
+
                             <td class="col">
                                 <input id="{{ disc.name }}" type="button" class="format btn btn-secondary btn-sm btn-block" value="Format">
-                                <input id="{{ disc.name }}" type="button" class="mount btn btn-secondary btn-sm btn-block" value="Mount">
-                                <input id="{{ disc.name }}" type="button" class="unmount btn btn-secondary btn-sm btn-block" value="Unmount">
+                                {% if disc.mountpoint == '' %}
+                                    <div>
+                                        <p class="lead mb-0 mt-2">
+                                            Mountpoint:
+                                        </p>
+                                        <form action="" method="POST">
+                                            <input type="text" size="100" class="form-control mountpoint" name="{{ disc.name }}">
+                                            <button id="{{ disc.name }}" type="submit" class="mount btn btn-secondary btn-sm btn-block mt-1">Mount</button>
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    <input id="{{ disc.name }}" type="button" class="unmount btn btn-secondary btn-sm btn-block" value="Unmount">
+                                {% endif %}
+
                             </td>
                         </tr>
                     {% endfor %}
@@ -54,10 +62,6 @@
         {% endif %}
     </div>
     <script>
-        let mountGroup = document.querySelectorAll('.text-group')
 
-        function HideElements() {
-
-        }
     </script>
 {% endblock %}
