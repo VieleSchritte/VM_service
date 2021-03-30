@@ -1,4 +1,3 @@
-from blkinfo import BlkDiskInfo
 from os import system
 import os
 
@@ -16,11 +15,5 @@ class Discs:
                 temporal_dict = {"name": line[0], "size": line[3]}
                 if len(line) < 7:
                     temporal_dict["mountpoint"] = ''
-                else:
-                    temporal_dict ["mountpoint"] = line[6]
-                all_discs.append(temporal_dict)
-
-        os.system('rm lsblk_out.txt')
+            all_discs.append(temporal_dict)
         return all_discs
-
-    

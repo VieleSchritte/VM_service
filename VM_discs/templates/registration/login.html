@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <div class="container w-25 text-center mt-5 border border-secondary">
+        <form method="post" action="{% url 'login' %}" class="form-group">
+            {% csrf_token %}
+            <table class="align-middle mt-3">
+                <tr class="mt-5">
+                  <td class="mx-auto lead"> {{ form.username.label_tag }}</td>
+                  <td class="form-control mb-2 ml-3">{{ form.username }}</td>
+                </tr>
+
+                <tr class="mt-5">
+                  <td class="mx-auto lead">{{ form.password.label_tag }}</td>
+                  <td class="form-control ml-3">{{ form.password }}</td>
+                </tr>
+            </table>
+            <div class="form-row mt-3">
+                <input type="submit" value="login" class="btn btn-secondary col w-30 mr-3"/>
+                <input type="hidden" name="next" value="{{ next }}" class=/>
+                <a href="{% url 'password_reset' %}" class="btn btn-primary w-30">Lost password?</a>
+            </div>
+        </form>
+
+        {% if form.errors %}
+          <p class="text-danger">Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+          {% if user.is_authenticated %}
+            <p class="text-danger">Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+          {% else %}
+            <p class="text-danger">Please login to see this page.</p>
+          {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock %}
