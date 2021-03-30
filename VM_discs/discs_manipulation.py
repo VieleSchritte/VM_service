@@ -31,7 +31,7 @@ class Discs:
             if line[0][0].isalpha():
                 prev_disc = line[0]
             else:
-                new_disc = d.subdirs_handling(line, prev_disc)
+                new_disc = d.subdirs_handling(line)
                 line[0] = prev_disc + '/' + new_disc
             all_discs.append(d.get_disc_info_dict(line))
         return all_discs
