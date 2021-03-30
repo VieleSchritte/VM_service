@@ -1,17 +1,15 @@
-from os import system
 import os
 
 
 class Discs:
     @staticmethod
-    def subdirs_handling(line, prev_disc):
+    def subdirs_handling(line):
         new_disc = ''
         if line[0][0].isalpha():
             for letter in line[0]:
                 if letter.isdigit() or letter.isalpha():
                     new_disc += letter
         return new_disc
-
 
     @staticmethod
     def get_disc_info_dict(line):
@@ -21,7 +19,6 @@ class Discs:
         else:
             disc_info_dict["mountpoint"] = line[6]
         return disc_info_dict
-
 
     @staticmethod
     def lsblk_out_proc(lsblk_out):
@@ -43,7 +40,7 @@ class Discs:
     def get_discs():
         os.system('mkdir tmp')
         os.system('lsblk >> tmp/lsblk_out.txt')
-        with open ('tmp/lsblk_out.txt') as lsblk_out:
+        with open('tmp/lsblk_out.txt') as lsblk_out:
             d = Discs()
             all_discs = d.lsblk_out_proc(lsblk_out)
         os.system('rm -rf tmp')
