@@ -9,7 +9,7 @@
         </ul>
         <section class="content container mt-5">
             <h3 class="lead text-center">Available discs:</h3>
-            <table class="table table-striped table-bordered table-responsive text-center">
+            <table id="table" class="table table-striped table-bordered table-responsive text-center">
                 <thead class="thead-dark">
                     <tr class="">
                         <th class="col">Disc</th>
@@ -20,14 +20,21 @@
                 </thead>
                 <tbody>
                     {% for disc in clear_discs %}
-                        <tr class="">
-                            <td class="col">{{ disc.name }}</td>
-                            <td class="col">{{ disc.size }}</td>
-                            <td class="col">{{ disc.mountpoint }}</td>
+                        <tr>
+                            <td id="disc-name" class="col">
+                                <p class="lead d-block font-weight-bold">{{ disc.name }}</p>
+                                <div class="text-group d-block">
+                                    <b class="lead d-block">Please enter mount path:</b>
+                                    <label><textarea name="mount-path" class="form-control w-150"></textarea></label>
+                                    <button type="submit" class="mount-submit btn btn-primary btn-sm d-block btn-block">Mount</button>
+                                </div>
+                            </td>
+                            <td id="disc-size" class="col">{{ disc.size }}</td>
+                            <td id="disc-mountpoint" class="col">{{ disc.mountpoint }}</td>
                             <td class="col">
-                                <button class="btn btn-secondary btn-sm btn-block">Edit</button>
-                                <button class="btn btn-secondary btn-sm btn-block">Format</button>
-                                <button class="btn btn-secondary btn-sm btn-block">Mount</button>
+                                <input id="{{ disc.name }}" type="button" class="format btn btn-secondary btn-sm btn-block" value="Format">
+                                <input id="{{ disc.name }}" type="button" class="mount btn btn-secondary btn-sm btn-block" value="Mount">
+                                <input id="{{ disc.name }}" type="button" class="unmount btn btn-secondary btn-sm btn-block" value="Unmount">
                             </td>
                         </tr>
                     {% endfor %}
@@ -38,7 +45,7 @@
         {% else %}
         <ul class="sidebar list-unstyled text-center lead">
             <li>
-                <p>You're not logged in. Please authorize to check available discs:</p>
+                <p class="lead">You're not logged in. Please authorize to check available discs:</p>
             </li>
             <li>
                 <a href="{% url 'login'%}?next={{request.path}}" class="btn btn-secondary mr-3">Log In</a>
@@ -46,4 +53,11 @@
         </ul>
         {% endif %}
     </div>
+    <script>
+        let mountGroup = document.querySelectorAll('.text-group')
+
+        function HideElements() {
+            
+        }
+    </script>
 {% endblock %}
